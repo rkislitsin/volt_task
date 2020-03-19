@@ -9,4 +9,10 @@ class Player < ApplicationRecord
   def add_achievement(achievement, match)
     ratings.create(achievement: achievement, match: match)
   end
+
+
+  def last_matches_achievements?(achievement)
+    ratings.where(achievement_id: achievement,
+                  match: Match.last_5_matches(command)).count.positive?
+  end
 end

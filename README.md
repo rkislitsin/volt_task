@@ -55,3 +55,17 @@ player.add_achievement(Achievement.all.sample, Match.last)
 ```
 
 
+"проверить выполнил ли игрок конкретный показатель хотя бы 1 раз за предыдущие 5 матчей команды"
+
+```ruby
+player = Player.last
+ => #<Player id: 55, name: "Harry Kane", command_id: 5, ...>
+  
+player.last_matches_achievements?(10)
+ => true
+   
+player.last_matches_achievements?(11)
+ => false 
+
+```
+
