@@ -5,4 +5,8 @@ class Player < ApplicationRecord
 
   validates_presence_of :name
   validates_presence_of :command
+
+  def add_achievement(achievement, match)
+    ratings.create(achievement: achievement, match: match)
+  end
 end

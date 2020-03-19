@@ -1,24 +1,57 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Тестовое задание:
 
-Things you may want to cover:
+Есть игроки, которые играют за команду, принимая участие в матчах.
+Есть показатели ("пробежал 10+ км", "сделал 70+ % точных передач" и так далее).
+Игроки в каждом матче какие-то показатели выполняют, а какие-то нет.
 
-* Ruby version
+Задание:
+Создать модели к данной предметной области.
+P.S. Полный набор атрибутов в моделях не принципиален, так что можно обойтись минимально достаточным.
 
-* System dependencies
+Реализовать методы, которые позволяют
+- отметить, что игрок выполнил такой-то показатель в матче
+- проверить выполнил ли игрок конкретный показатель хотя бы 1 раз за предыдущие 5 матчей команды
+- выбрать Top-5 игроков по конкретному показателю в конкретной команде и по всем командам в целом
 
-* Configuration
+Требования к тестированию
+Код покрыть функциональными тестами (rspec).
 
-* Database creation
+# Запуск приложения
 
-* Database initialization
+Для того, чтобы запустить приложение, выполните следующие команды у себя в окне терминала:
 
-* How to run the test suite
+Склонируйте репозиторий с GitHub и перейдите в папку приложения:
+```
+git clone https://github.com/rkislitsin/volt_task.git
+cd volt-test
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Установите необходимые гемы:
+```
+bundle install
+```
 
-* Deployment instructions
+Создайте базу данных, запустите миграции для базы данных и файл `seeds.rb` для создания записей в базу данных:
+```
+bundle exec rake db:create
+bundle exec rake db:migrate
+bundle exec rake db:seed
+```
 
-* ...
+Тестирование методов через:
+```
+bundle exec rails console
+``` 
+"отметить, что игрок выполнил такой-то показатель в матче"
+
+```ruby
+player = Player.last
+ => #<Player id: 55, name: "Harry Kane", command_id: 5, ...>
+  
+player.add_achievement(Achievement.all.sample, Match.last)
+ => #<Rating id: 489, player_id: 55, achievement_id: 6, match_id: 20, ...> 
+
+```
+
+
